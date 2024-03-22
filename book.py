@@ -1,7 +1,12 @@
 import uuid
 class Book:
     id_counter = 0
-    def __init__(self, name, author, publishing, year = 2024, pages = 200, binding = "firm", language = "Ukrainian", size = "A4"):
+    name_publishing = {"КСД", "Vivat", "ВСЛ", "Абабагаламага", "РМ"}
+    name_binding = {"firm", "mild", "supercover"}
+    name_language = {"Ukrainian", "English", "German", "French", "Spanish"}
+    name_size = {"A3", "A4", "A5", "A6"}
+
+    def __init__(self, name, author, publishing, year=2024, pages=200, binding="firm", language="Ukrainian", size="A4"):
         Book.id_counter += 1
         self.__id = Book.id_counter
         self.__name = name
@@ -42,9 +47,8 @@ class Book:
 
     @publishing.setter
     def publishing(self, publishing):
-        name_publishing = ("КСД", "Vivat", "ВСЛ", "Абабагаламага", "РМ")
         if type(publishing) == str:
-            for i in name_publishing:
+            for i in Book.name_publishing:
                 if publishing == i:
                     self.__publishing = publishing
                     break
@@ -67,7 +71,6 @@ class Book:
         else:
             print("Year must be an integer!")
 
-
     @property
     def pages(self):
         return self.__pages
@@ -75,7 +78,7 @@ class Book:
     @pages.setter
     def pages(self, pages):
         if type(pages) == int:
-            if pages > 50:
+            if pages > 1:
                 self.__pages = pages
             else:
                 print("Incorrect number of pages")
@@ -89,8 +92,7 @@ class Book:
     @binding.setter
     def binding(self, binding):
         if type(binding) == str:
-            name_binding = ("firm", "mild", "supercover")
-            for i in name_binding:
+            for i in Book.name_binding:
                 if binding == i:
                     self.__binding = binding
                     break
@@ -106,8 +108,7 @@ class Book:
     @language.setter
     def language(self, language):
         if type(language) == str:
-            name_language = ("Ukrainian", "English", "German", "French", "Spanish")
-            for i in name_language:
+            for i in Book.name_language:
                 if language == i:
                     self.__language = language
                     break
@@ -125,8 +126,7 @@ class Book:
     @size.setter
     def size(self, size):
         if type(size) == str:
-            name_size = ("A3", "A4", "A5", "A6")
-            for i in name_size:
+            for i in Book.name_size:
                 if size == i:
                     self.__size = size
                     break
