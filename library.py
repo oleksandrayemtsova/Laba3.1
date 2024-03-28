@@ -1,3 +1,6 @@
+import datetime
+
+
 class Library:
     def __init__(self):
         self.array = []
@@ -8,6 +11,11 @@ class Library:
 
     def add_book(self, book):
         self.array.append(book)
+
+    def __str__(self):
+        for book in self.array:
+            print(f"ID: {book.id}, Reservation:{book.reservation} Name: {book.name}, Author: {book.author}, Publishing: {book.publishing}, Year: {book.year}, Pages: {book.pages}, Binding: {book.binding}, Language: {book.language}, Size: {book.size}")
+        return f"There are {self.size} books in the library"
 
     def find_by_author(self, author):
         found_books = []
@@ -45,3 +53,21 @@ class Library:
             return f"Number of books with the number of pages from {range1} to {range2} : {len(found_books)}"
         else:
             print("The ranges must be greater than zero!")
+
+    def request(self, id_book, reader):
+        for book in self.array:
+            if id_book == book.id:
+                if "Does not have a reservation" == book.reservation:
+                    if reader.library_card.size < 3:
+                        book.reservation = "There is a reservation"
+                        today = datetime.date.today()
+                        return_date = today + datetime.timedelta(days=30)
+                        reader.library_card.add_book(book, return_date)
+                        return f"Thank you for choosing our library!!!"
+                    else:
+                        return f"You have already reserved the maximum number of books"
+                else:
+                    return f"Unfortunately, this book is reserved"
+        else:
+            return f"Book with ID {id_book} does not exist in the library"
+

@@ -1,5 +1,7 @@
 from book import Book
 from library import Library
+from reader import Reader
+from library_card import LibraryCard
 
 
 def main():
@@ -14,22 +16,21 @@ def main():
     book9 = Book("Сім етапів смерті", "Річард Шеперд", "РМ", 2023, 320, "firm", "Ukrainian", "A5")
     book10 = Book("Діана", "Ендрю Мортон", "Абабагаламага", 2024, 400, "firm", "Ukrainian", "A5")
     array = [book1, book2, book3, book4, book5, book6, book7, book8, book9, book10]
-
     library = Library()
-    print(library.size)
-
+    reader = Reader("Sasha", "Yemtsova", 18, 380687562987)
+    print(reader)
     for book in array:
         library.add_book(book)
-
-    print(library.size)
-
     print(library.find_by_author("Сара Маас"), "\n")
     print(library.find_by_publishing("Vivat"), "\n")
     print(library.published_after_this_year(2023), "\n")
     print(library.books_in_the_page_range(250, 350), "\n")
     print(library.books_in_the_page_range(900, 400), "\n")
-    print(library.books_in_the_page_range(400, 400), "\n")
-    print(library.books_in_the_page_range(-10, 0), "\n")
+    print(library.request(5, reader))
+    print(library.request(2, reader))
+    print(library.request(3, reader))
+    print(library.request(4, reader))
+    print(reader.library_card)
 
 
 if __name__ == "__main__":
