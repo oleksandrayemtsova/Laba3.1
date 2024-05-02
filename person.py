@@ -1,14 +1,13 @@
-from library_card import LibraryCard
+import re
 
 
-class Reader:
+class Person:
 
     def __init__(self, name, surname, age, phone_number):
         self.__name = name
         self.__surname = surname
         self.__age = age
         self.__phone_number = phone_number
-        self.__library_card = LibraryCard(name)
 
     @property
     def name(self):
@@ -45,20 +44,14 @@ class Reader:
 
     @phone_number.setter
     def phone_number(self, phone_number):
-        if type(phone_number) == int:
-            if 380000000000 < phone_number < 381000000000:
-                self.__phone_number = phone_number
-            else:
-                print("Invalid phone number")
+        num = re.compile(r"^\+380\d{9}$")
+        if re.match(num, phone_number):
+            self.__phone_number = phone_number
         else:
-            print("Age must be an integer!")
-
-    @property
-    def library_card(self):
-        return self.__library_card
+            print("Invalid phone number")
 
     def __str__(self):
-        return f"Name: {self.name}, Surname: {self.surname}, Age: {self.age}, Phone number: +{self.phone_number}, \n{self.library_card}"
+        return f"Name: {self.name}, Surname: {self.surname}, Age: {self.age}, Phone number: {self.phone_number}"
 
 
 

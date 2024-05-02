@@ -4,9 +4,8 @@ class Book:
     name_binding = {"firm", "mild", "supercover"}
     name_language = {"Ukrainian", "English", "German", "French", "Spanish"}
     name_size = {"A3", "A4", "A5", "A6"}
-    name_reservation = {"There is a reservation", "Does not have a reservation"}
 
-    def __init__(self, name, author, publishing, year=2024, pages=200, binding="firm", language="Ukrainian", size="A4", reservation="Does not have a reservation", return_date=0):
+    def __init__(self, name, author, publishing, year=2024, pages=200, binding="firm", language="Ukrainian", size="A4", book_number=1):
         Book.id_counter += 1
         self.__id = Book.id_counter
         self.__name = name
@@ -17,8 +16,7 @@ class Book:
         self.__binding = binding
         self.__language = language
         self.__size = size
-        self.__reservation = reservation
-        self.__return_date = return_date
+        self.book_number = book_number
 
     @property
     def name(self):
@@ -141,25 +139,15 @@ class Book:
         return self.__id
 
     @property
-    def reservation(self):
-        return self.__reservation
+    def book_number(self):
+        return self.__book_number
 
-    @reservation.setter
-    def reservation(self, reservation):
-        for i in Book.name_reservation:
-            if reservation == i:
-                self.__reservation = reservation
-                break
+    @book_number.setter
+    def book_number(self, book_number):
+        if type(book_number) == int:
+            self.__book_number = book_number
         else:
-            print("Invalid reservation!")
-
-    @property
-    def return_date(self):
-        return self.__return_date
-
-    @return_date.setter
-    def return_date(self, return_date):
-        self.__return_date = return_date
+            print("The book number must be an integer")
 
     def __str__(self):
-        return f"ID: {self.id}, Reservation:{self.reservation} Name: {self.name}, Author: {self.author}, Publishing: {self.publishing}, Year: {self.year}, Pages: {self.pages}, Binding: {self.binding}, Language: {self.language}, Size: {self.size}"
+        return f"ID: {self.id}, Name: {self.name}, Author: {self.author}, Publishing: {self.publishing}, Year: {self.year}, Pages: {self.pages}, Binding: {self.binding}, Language: {self.language}, Size: {self.size}"

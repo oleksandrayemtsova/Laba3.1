@@ -9,12 +9,13 @@ class Library:
     def size(self):
         return len(self.array)
 
-    def add_book(self, book):
+    def add_book(self, book, quantity):
+        book.book_number = quantity
         self.array.append(book)
 
     def __str__(self):
         for book in self.array:
-            print(f"ID: {book.id}, Reservation:{book.reservation} Name: {book.name}, Author: {book.author}, Publishing: {book.publishing}, Year: {book.year}, Pages: {book.pages}, Binding: {book.binding}, Language: {book.language}, Size: {book.size}")
+            print(f"ID: {book.id}, Name: {book.name}, Author: {book.author}, Publishing: {book.publishing}, Year: {book.year}, Pages: {book.pages}, Binding: {book.binding}, Language: {book.language}, Size: {book.size}")
         return f"There are {self.size} books in the library"
 
     def find_by_author(self, author):
@@ -54,20 +55,21 @@ class Library:
         else:
             print("The ranges must be greater than zero!")
 
-    def request(self, id_book, reader):
+    def request_to_receive_a_book(self, id_book, reader):
         for book in self.array:
             if id_book == book.id:
-                if "Does not have a reservation" == book.reservation:
+                if book.book_number >= 1:
                     if reader.library_card.size < 3:
-                        book.reservation = "There is a reservation"
+                        book.book_number -= 1
                         today = datetime.date.today()
                         return_date = today + datetime.timedelta(days=30)
                         reader.library_card.add_book(book, return_date)
                         return f"Thank you for choosing our library!!!"
                     else:
-                        return f"You have already reserved the maximum number of books"
+                        return f"You have already reserved the maximum number of books!"
                 else:
-                    return f"Unfortunately, this book is reserved"
+                    return f"Unfortunately, this book is reserved!"
         else:
-            return f"Book with ID {id_book} does not exist in the library"
+            return f"Book with ID {id_book} does not exist in the library!"
+
 
