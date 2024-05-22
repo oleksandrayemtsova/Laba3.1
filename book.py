@@ -1,13 +1,10 @@
 class Book:
-    id_counter = 0
     name_publishing = {"КСД", "Vivat", "ВСЛ", "Абабагаламага", "РМ"}
     name_binding = {"firm", "mild", "supercover"}
     name_language = {"Ukrainian", "English", "German", "French", "Spanish"}
     name_size = {"A3", "A4", "A5", "A6"}
 
     def __init__(self, name, author, publishing, year=2024, pages=200, binding="firm", language="Ukrainian", size="A4", book_number=1):
-        Book.id_counter += 1
-        self.__id = Book.id_counter
         self.__name = name
         self.__author = author
         self.__publishing = publishing
@@ -135,10 +132,6 @@ class Book:
             print("Size must be a string!")
 
     @property
-    def id(self):
-        return self.__id
-
-    @property
     def book_number(self):
         return self.__book_number
 
@@ -150,4 +143,4 @@ class Book:
             print("The book number must be an integer")
 
     def __str__(self):
-        return f"ID: {self.id}, Name: {self.name}, Author: {self.author}, Publishing: {self.publishing}, Year: {self.year}, Pages: {self.pages}, Binding: {self.binding}, Language: {self.language}, Size: {self.size}"
+        return f"Name: {self.name}, Author: {self.author}, Publishing: {self.publishing}, Year: {self.year}, Pages: {self.pages}, Binding: {self.binding}, Language: {self.language}, Size: {self.size}, book_number: {self.book_number}"

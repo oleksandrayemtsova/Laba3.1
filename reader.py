@@ -12,4 +12,5 @@ class Reader(Person):
         return self.__library_card
 
     def __str__(self):
-        return f"Name: {self.name}, Surname: {self.surname}, Age: {self.age}, Phone number: +{self.phone_number}, \n{self.library_card}"
+        return (f"Name: {self.name}, Surname: {self.surname}, Age: {self.age}, Phone number: +{self.phone_number},"
+                f""f"\n{self.library_card}")

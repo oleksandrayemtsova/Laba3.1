@@ -1,3 +1,4 @@
+
 class LibraryCard:
     counter_number = 0
 
@@ -8,11 +9,11 @@ class LibraryCard:
         self.books = []
 
     def __str__(self):
-        print(f"\n{'*'*170}\nLibrary card:\nNumber: №{self.number}, Owner: {self.owner}")
+        print(f"{'*'*170}\nLibrary card:\nNumber: №{self.number}, Owner: {self.owner}")
         print(f"Books: {len(self.books)}")
         for book in self.books:
-            print(f"ID: {book.id}, Name: {book.name}")
-        return f"\n{'*'*170}"
+            print(f"Name: {book.name}")
+        return f"{'*'*170}"
 
     @property
     def number(self):
@@ -31,15 +32,19 @@ class LibraryCard:
         print(f"You have borrowed the book '{book.name}' and must return it by {return_date}")
 
     def return_book(self, book):
+        book.book_number += 1
         self.books.remove(book)
         print(f"Thank you, you have returned the book '{book.name}'")
 
     def request_to_return_a_book(self, id_book):
         for book in self.books:
-            print(book)
-            if book.id == id_book:
-                book.book_number += 1
-                self.return_book(book)
-                return f"Thank you for choosing our library!!!"
+            from main import bookshelves
+            for key in bookshelves.keys:
+                if id_book == key - 10:
+                    if book.name == bookshelves.library[key].name:
+                        self.return_book(book)
+                        return f"Thank you for choosing our library!!!"
         else:
             return f"We're sorry, you haven't yet reserved the book with the ID {id_book}"
+
+
